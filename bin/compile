@@ -99,5 +99,9 @@ echo 'export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebase
 
 echo "-----> Removing overlays folder: $BUILD_DIR/overlays"
 rm -fr $BUILD_DIR/overlays
+WAR_FILE=`find $BUILD_DIR/target -type f -name '*.war' | xargs basename`
+EXPANDED_WAR_DIR=`echo "${WAR_FILE%.war}"`
+echo "-----> Removing unnecesarry unpacked war folder: $BUILD_DIR/target/$EXPANDED_WAR_DIR"
+rm -fr $BUILD_DIR/target/$EXPANDED_WAR_DIR
 
 logger -p user.notice -t "slugc[$$]" "language_pack_java java_compile_end $LOGGER_FLAGS"
